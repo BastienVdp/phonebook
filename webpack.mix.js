@@ -15,3 +15,4 @@ mix.webpackConfig({
 
 mix.js('resources/js/index.js', 'public/assets/js')
 	.sass("resources/sass/index.scss", "public/assets/css")
+	.browserSync("http://phonebook.test")

@@ -13,6 +13,7 @@ use App\Actions\User\UpdatePasswordAction;
 use App\Actions\User\UpdateInformationsAction;
 
 use App\Middlewares\VerifyTokenMiddleware;
+use App\Models\Question;
 
 class ProfileController extends Controller
 {
@@ -22,7 +23,7 @@ class ProfileController extends Controller
         $this->registerMiddleware(
             [
                 "class" => VerifyTokenMiddleware::class,
-                "actions" => ["index", "update", "updatePassword"]
+                "actions" => ["index", "update", "updatePassword", "storeQuestions"]
             ]
         );
     }
@@ -102,7 +103,55 @@ class ProfileController extends Controller
 				'errors' => $errors
 			], 422);
 		}
+	}
 
+	public function storeQuestions($request, $response)
+	{
+		$rules = [];
+
+		if ($request->body["questions"]) {
+			foreach($request->body["questions"] as $key => $question) {
+				if($question === "") {
+					$rules["question-" . $key + 1] = "required";
+				}
+			}
+		}
+		if($request->body["reponses"]) {
+			foreach($request->body["reponses"] as $key => $reponse) {
+				if($reponse === "") {
+					$rules["reponse-" . $key + 1] = "required";
+				}
+			}
+		}
+
+		
+		$errors = Validation::validate($request, 
+			$rules
+		, Question::class);
+
+		if($errors) {
+			return $response->jsonResponse([
+				"success" => false,
+				"errors" => $errors
+			], 422);
+		} else {
+			$user = User::find(['id' => $request->user()->id]);
+			if($user->questions()) {
+				Question::delete(['user_id' => $request->user()->id]);
+			}
+			foreach($request->body["questions"] as $key => $question) {
+				Question::create([
+					"question" => $question,
+					"reponse" => $request->body["reponses"][$key],
+					"user_id" => $request->user()->id
+				]);
+			}
+
+			return $response->jsonResponse([
+				"success" => true,
+				"message" => "Vos questions de sécurité ont bien été ajoutées."
+			], 200);
+		}
 	}
 	
 }

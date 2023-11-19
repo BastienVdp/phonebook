@@ -15,3 +15,4 @@ App\Core\Application::delete('/api/contacts/{id}', [App\Controllers\Api\Contacts
 App\Core\Application::get('/api/profile', [App\Controllers\Api\ProfileController::class, 'index']);
 App\Core\Application::post('/api/profile', [App\Controllers\Api\ProfileController::class, 'update']);
 App\Core\Application::post('/api/profile/password', [App\Controllers\Api\ProfileController::class, 'updatePassword']);
+App\Core\Application::post('/api/profile/questions', [App\Controllers\Api\ProfileController::class, 'storeQuestions']);

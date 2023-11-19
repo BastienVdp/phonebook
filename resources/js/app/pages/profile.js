@@ -1,3 +1,4 @@
+import Questions from "../components/Questions";
 import Page from "../core/Page";
 import axiosClient from "../utils/axios";
 
@@ -18,6 +19,7 @@ export default class Profile extends Page
 				errorSurname: '.form__surname__error',
 				errorUsername: '.form__username__error',
 				errorEmail: '.form__email__error',
+
 				passwordForm: '.form.password',
 				password: '.form__password',
 				newPassword: '.form__newpassword',
@@ -36,6 +38,8 @@ export default class Profile extends Page
 		this.getUserInformations();
 		this.initForm();
 		this.initPasswordForm();
+		
+		this.questions = new Questions();
 	}
 	
 	async getUserInformations()

@@ -97,5 +97,22 @@
 			</div>
 			<button type="submit" class="form__submit">Modifier</button>
 		</form>
+		<div class="profile__title">
+			<h2>Ajouter des questions de sécurité</h2>
+			<p>
+				Vous pouvez ajouter des questions de sécurité ici. <br/>
+				Si vous rajoutez des nouvelles questions, vous écraserez les questions précédentes.
+			</p>
+		</div>
+		<div class="questions">
+			<button class="addQuestion">+</button>
+			<button class="removeQuestion hidden">-</button>
+			<form class="form questions">
+				<ul class="questions__list">
+
+				</ul>
+				<button class="form__submit">Enregistrer</button>
+			</form>
+		</div>
 	</div>
 </div>

@@ -10,7 +10,8 @@
   line-height: normal;
 }
 
-.profile__title h2, .contacts__component__item__informations__fullname {
+.profile .addQuestion,
+.profile .removeQuestion, .profile__title h2, .contacts__component__item__informations__fullname {
   font-size: 16px;
   font-weight: 500;
 }
@@ -672,6 +673,7 @@ button.form__submit:disabled {
   height: 100%;
   overflow-y: scroll;
   padding-right: 10px;
+  padding-bottom: 50px;
 }
 .profile__title {
   margin-bottom: 10px;
@@ -694,6 +696,30 @@ button.form__submit:disabled {
   width: 30%;
   margin-left: auto;
   margin-bottom: 20px;
+}
+.profile .addQuestion,
+.profile .removeQuestion {
+  background-color: #F6F6F6;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  font-weight: 600;
+  float: right;
+}
+.profile .removeQuestion {
+  margin-right: 10px;
+}
+.profile .hidden {
+  display: none;
+}
+.profile .form.questions .group {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F6F6F6;
+}
+.profile .form.questions .group p:nth-of-type(1) {
+  margin-bottom: 10px;
 }
 
 .home {
