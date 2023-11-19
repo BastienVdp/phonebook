@@ -20,10 +20,10 @@ export default class ForgotPassword extends Page
 				reponse: '.form__reponse',
 				errorReponse: '.form__reponse__error',
 				formNewPassword: '.form.three',
-				password: '.form__newpassword',
-				errorPassword: '.form__newpassword__error',
-				password_confirmation: '.form__newpassword_confirmation',
-				errorPassword_confirmation: '.form__newpassword_confirmation__error',
+				newPassword: '.form__newPassword',
+				errorNewPassword: '.form__newPassword__error',
+				newPassword_confirmation: '.form__newPassword_confirmation',
+				errorNewPassword_confirmation: '.form__newPassword_confirmation__error',
 			}
 		});
 	}
@@ -55,9 +55,11 @@ export default class ForgotPassword extends Page
 
 	submitPassword()
 	{
+		console.log(this.elements.newPassword.value, this.elements.newPassword_confirmation.value);
+
 		axiosClient.post('/api/reset-password', {
-			newPassword: this.elements.password.value,
-			newPassword_confirmation: this.elements.password_confirmation.value,
+			newPassword: this.elements.newPassword.value,
+			newPassword_confirmation: this.elements.newPassword_confirmation.value,
 			email: this.elements.email.value,
 			token: localStorage.getItem('reset_token')
 		}).then((response) => {
@@ -75,10 +77,10 @@ export default class ForgotPassword extends Page
 			}
 			console.log(response);
 		}).catch((error) => {
+			console.log(error.response);
 			if(error.response.status === 422 && !error.response.data.token) {
 				this.setErrors(error.response.data.errors);
 			}
-		
 		})
 	}
 

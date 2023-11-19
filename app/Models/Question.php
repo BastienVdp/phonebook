@@ -26,6 +26,8 @@ class Question extends Model
     public static function getLabels(): array
     {
         return [
+            'question' => 'Question de sécurité',
+            'reponse' => 'Réponse',
             'question-1' => 'Question 1',
             'question-2' => 'Question 2',
             'question-3' => 'Question 3',

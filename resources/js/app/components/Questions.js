@@ -33,7 +33,10 @@ export default class Questions extends Component
 			questions: this.getValues(inputsQuestions),
 			reponses: this.getValues(inputsReponses)
 		}).then(response => {
-			console.log(response)
+			this.app.toast.show({
+				type: 'success',
+				message: response.data.message
+			})
 		}).catch(error => {
 			if(error && error.response.data.errors) {
 				this.resetErrors();

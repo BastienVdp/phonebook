@@ -88,7 +88,7 @@ class Validation
     {
         $confirmationKey = str_replace('_confirmation', '', $key);
         if ($value !== $request->body[$confirmationKey]) {
-            return 'Le champ ' . strtolower(self::$labels[$key]) . ' de confirmation ne correspond pas.';
+            return 'Le champ ' . strtolower(self::$labels[$key]) . ' ne correspond pas.';
             }
 
         return null;

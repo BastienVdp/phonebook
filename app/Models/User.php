@@ -35,7 +35,7 @@ class User extends Model
             'password' => 'Mot de passe',
             'password_confirmation' => 'Confirmation du mot de passe',
             'newPassword' => 'Nouveau mot de passe',
-            'newPassword_confirmation' => 'Confirmation du nouveau mot de passe',
+            'newPassword_confirmation' => 'Nouveau mot de passe',
         ];
     }
 

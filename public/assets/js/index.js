@@ -2844,7 +2844,10 @@ var Questions = /*#__PURE__*/function (_Component) {
         questions: this.getValues(inputsQuestions),
         reponses: this.getValues(inputsReponses)
       }).then(function (response) {
-        console.log(response);
+        _this2.app.toast.show({
+          type: 'success',
+          message: response.data.message
+        });
       })["catch"](function (error) {
         if (error && error.response.data.errors) {
           _this2.resetErrors();
@@ -3659,10 +3662,10 @@ var ForgotPassword = /*#__PURE__*/function (_Page) {
         reponse: '.form__reponse',
         errorReponse: '.form__reponse__error',
         formNewPassword: '.form.three',
-        password: '.form__newpassword',
-        errorPassword: '.form__newpassword__error',
-        password_confirmation: '.form__newpassword_confirmation',
-        errorPassword_confirmation: '.form__newpassword_confirmation__error'
+        newPassword: '.form__newPassword',
+        errorNewPassword: '.form__newPassword__error',
+        newPassword_confirmation: '.form__newPassword_confirmation',
+        errorNewPassword_confirmation: '.form__newPassword_confirmation__error'
       }
     });
   }
@@ -3696,9 +3699,10 @@ var ForgotPassword = /*#__PURE__*/function (_Page) {
     key: "submitPassword",
     value: function submitPassword() {
       var _this2 = this;
+      console.log(this.elements.newPassword.value, this.elements.newPassword_confirmation.value);
       _utils_axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/reset-password', {
-        newPassword: this.elements.password.value,
-        newPassword_confirmation: this.elements.password_confirmation.value,
+        newPassword: this.elements.newPassword.value,
+        newPassword_confirmation: this.elements.newPassword_confirmation.value,
         email: this.elements.email.value,
         token: localStorage.getItem('reset_token')
       }).then(function (response) {
@@ -3716,6 +3720,7 @@ var ForgotPassword = /*#__PURE__*/function (_Page) {
         }
         console.log(response);
       })["catch"](function (error) {
+        console.log(error.response);
         if (error.response.status === 422 && !error.response.data.token) {
           _this2.setErrors(error.response.data.errors);
         }

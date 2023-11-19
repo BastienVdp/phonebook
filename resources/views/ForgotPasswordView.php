@@ -53,20 +53,20 @@
 						<input 
 							type="password" 
 							id="newpassword"
-							class="form__newpassword" 
+							class="form__newPassword" 
 							placeholder="Nouveau mot de passe" 
 						/>
-						<p class="form__newpassword__error"></p>
+						<p class="form__newPassword__error"></p>
 					</div>
 					<div>
 						<label for="newpassword_confirmation">Confirmation du nouveau mot de passe</label>
 						<input 
 							type="password" 
 							id="newpassword_confirmation"
-							class="form__newpassword_confirmation" 
+							class="form__newPassword_confirmation" 
 							placeholder="Confirmation du nouveau mot de passe" 
 						/>
-						<p class="form__newpassword_confirmation__error"></p>
+						<p class="form__newPassword_confirmation__error"></p>
 					</div>
 					<button class="form__submit">Modifier</button>
 				</form>
