@@ -1,0 +1,21 @@
+{
+    "name": "phonebook",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+    },
+    "authors": [
+        {
+            "name": "BastienVdp",
+            "email": "bastienpp@hotmail.com"
+        }
+    ],
+    "require-dev": {
+        "fakerphp/faker": "^1.23"
+    },
+    "require": {
+        "firebase/php-jwt": "^6.9"
+    }
+}

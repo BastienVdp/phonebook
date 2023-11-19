@@ -1,0 +1,785 @@
+.login h1, .register h1, .addContact h1, .header__title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.forgotPassword h1 {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.profile__title h2, .contacts__component__item__informations__fullname {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.forgotPassword .step-two label, .profile__title p, .toast, .form div .file-input span, .form div label, .categories__component__item, .header .logout, .header div {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form div .switch > span, .form div p, .contacts__component__item__informations__category, .contacts__component__item__informations__phone, .search__input {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@font-face {
+  font-family: "Goldplay";
+  font-weight: 300;
+  font-style: normal;
+  src: url("/assets/fonts/Goldplay-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Goldplay";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/assets/fonts/Goldplay-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Goldplay";
+  font-weight: 500;
+  font-style: normal;
+  src: url("/assets/fonts/Goldplay-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Goldplay";
+  font-weight: 600;
+  font-style: normal;
+  src: url("/assets/fonts/Goldplay-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Goldplay";
+  font-weight: 700;
+  font-style: normal;
+  src: url("/assets/fonts/Goldplay-Bold.woff2") format("woff2");
+}
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Goldplay", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--clr-black);
+  height: 100vh;
+  overflow: hidden;
+  --header-height: 60px;
+}
+
+.app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px 25px 20px 25px;
+}
+
+@media screen and (max-width: 320px) {
+  .app {
+    padding: 10px;
+  }
+}
+.content {
+  position: relative;
+  width: 100%;
+  height: calc(100% - var(--header-height));
+}
+
+@media screen and (min-width: 768px) {
+  .app {
+    position: relative;
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button.form__submit:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all !important;
+}
+
+.header {
+  height: var(--header-height);
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header.hidden {
+  display: none;
+}
+.header div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header div a {
+  color: #081C15;
+  text-decoration: none;
+}
+.header .logout {
+  font-family: inherit;
+  border: none;
+  background-color: transparent;
+  color: #081C15;
+  padding: 0;
+}
+.header__title {
+  margin: 0;
+}
+.header__title b {
+  color: #0083CA;
+}
+.header__button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #F6F6F6;
+  display: grid;
+  place-content: center;
+}
+.header__button.hidden {
+  display: none;
+}
+
+@media screen and (max-width: 470px) {
+  .header {
+    margin-bottom: 10px;
+  }
+  .header div:nth-of-type(1) div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .header__title {
+    font-size: 26px;
+  }
+}
+.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px 5px 15px;
+  background-color: #F6F6F6;
+  border-radius: 10px;
+}
+.search__input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  color: #081C15;
+  outline: none;
+}
+.search__button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.categories__component {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 15px;
+  overflow-x: scroll;
+  padding-bottom: 0.75rem;
+  flex: none;
+}
+.categories__component::-webkit-scrollbar-track {
+  background-color: #fff;
+  display: none;
+}
+.categories__component::-webkit-scrollbar {
+  height: 0px;
+  background-color: #D1D1D1;
+}
+.categories__component::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #D1D1D1;
+}
+.categories__component__item {
+  width: -moz-min-content;
+  width: min-content;
+  line-height: 32px;
+  height: 32px;
+  background-color: #F6F6F6;
+  border-radius: 100px;
+  padding: 0 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.categories__component__item.active {
+  background-color: #081C15;
+  color: #fff;
+}
+
+.contacts {
+  height: 100%;
+  overflow: hidden;
+}
+
+.contacts__component {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+.contacts__component::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+.contacts__component::-webkit-scrollbar {
+  width: 10px;
+  background-color: #D1D1D1;
+}
+.contacts__component::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #D1D1D1;
+}
+.contacts__component__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 1rem;
+  background-color: #F6F6F6;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.contacts__component__item__image {
+  width: 64px;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.contacts__component__item__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+}
+.contacts__component__item__informations {
+  display: flex;
+  flex-direction: column;
+}
+.contacts__component__item__informations__fullname {
+  font-weight: 600;
+}
+.contacts__component__item__informations__phone {
+  color: gray;
+  margin-bottom: 3px;
+}
+.contacts__component__item__informations__category {
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 100px;
+  width: -moz-min-content;
+  width: min-content;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+.contacts__component__item__informations__favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.contacts__component__item__informations__favorite svg {
+  fill: #A9A9A9;
+}
+
+.contacts__bar {
+  height: 40px;
+  line-height: 35px;
+  color: #A9A9A9;
+}
+.contacts__bar__count b {
+  font-weight: 600;
+  color: #081C15;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.form .split {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 0;
+}
+.form .split div {
+  flex: 1;
+}
+.form .form__submit {
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 5px;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  color: #fff;
+  width: 100%;
+  background-color: #0083CA;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 5px;
+}
+.form div p {
+  color: #B60115;
+  margin: 10px 0 5px 0;
+  line-height: 1.2;
+}
+.form div label {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form div label button {
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+  color: #0083CA;
+  font-weight: 500;
+}
+.form div input[type=text], .form div input[type=email], .form div input[type=password] {
+  padding: 10px 15px;
+  border: none;
+  background-color: #F6F6F6;
+  border-radius: 10px;
+  font-family: inherit;
+  line-height: 1.5;
+  color: #081C15;
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid transparent;
+}
+.form div input[type=text]::-moz-placeholder, .form div input[type=email]::-moz-placeholder, .form div input[type=password]::-moz-placeholder {
+  color: #A9A9A9;
+}
+.form div input[type=text]::placeholder, .form div input[type=email]::placeholder, .form div input[type=password]::placeholder {
+  color: #A9A9A9;
+}
+.form div input[type=text]:focus, .form div input[type=email]:focus, .form div input[type=password]:focus {
+  outline: none;
+}
+.form div select {
+  padding: 10px 15px;
+  border: none;
+  background-color: #F6F6F6;
+  border-radius: 10px;
+  font-family: inherit;
+  line-height: 1.5;
+  color: #A9A9A9;
+  width: 100%;
+  cursor: pointer;
+  border-right: 16px solid transparent;
+}
+.form div select:focus {
+  outline: none;
+}
+.form div select.error, .form div input[type=text].error, .form div input[type=email].error, .form div input[type=password].error {
+  animation: shake 0.3s ease-in-out;
+}
+.form div .switch {
+  position: relative;
+  display: inline-block;
+  margin-top: 5px;
+}
+.form div .switch > span {
+  position: absolute;
+  top: 8px;
+  font-weight: 500;
+  pointer-events: none;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  width: 50%;
+  text-align: center;
+}
+.form div .switch > span.on {
+  left: 0;
+  padding-left: 2px;
+  color: white;
+}
+.form div .switch > span.off {
+  right: 0;
+  padding-right: 4px;
+  color: #081C15;
+}
+.form div .switch input.check-toggle-round-flat:checked ~ .off {
+  color: white;
+}
+.form div .switch input.check-toggle-round-flat:checked ~ .on {
+  color: #081C15;
+}
+.form div .switch .check-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.form div .switch .check-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.form div .switch input.check-toggle-round-flat + label {
+  padding: 2px;
+  width: 97px;
+  height: 34px;
+  background-color: #F6F6F6;
+  border-radius: 60px;
+}
+.form div .switch input.check-toggle-round-flat + label:before,
+.form div .switch input.check-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+.form div .switch input.check-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #F6F6F6;
+  border-radius: 60px;
+}
+.form div .switch input.check-toggle-round-flat + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 46px;
+  background-color: #081C15;
+  border-radius: 52px;
+  transition: margin 0.2s;
+}
+.form div .switch input.check-toggle-round-flat:checked + label:after {
+  margin-left: 44px;
+}
+.form div .file-input {
+  position: relative;
+  padding: 8px 15px;
+  border: none;
+  background-color: #dcdcdc;
+  border-radius: 10px;
+  line-height: 1.5;
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid transparent;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #F6F6F6;
+  color: #A9A9A9;
+}
+.form div .file-input span {
+  color: #A9A9A9;
+  font-weight: 400;
+}
+.form div .file-input input[type=file] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.form div .file-input:focus {
+  outline: none;
+}
+.form div .file-input::-moz-placeholder {
+  color: #A9A9A9;
+}
+.form div .file-input::placeholder {
+  color: #A9A9A9;
+}
+
+@media screen and (max-width: 320px) {
+  .form {
+    width: 100% !important;
+  }
+}
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: auto;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+  opacity: 0;
+}
+.toast.toast--success {
+  background-color: #C9F39E;
+}
+.toast.toast--error {
+  background-color: #DC7B69;
+}
+
+.transition {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999999999;
+  pointer-events: none;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(2px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.login, .register, .addContact {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login .form, .register .form, .addContact .form {
+  width: 280px;
+}
+.login a, .register a, .addContact a {
+  color: #0083CA;
+  font-weight: 500;
+}
+
+.register {
+  margin-top: -10px;
+  height: 100vh;
+}
+.register .form {
+  width: 360px;
+}
+
+.showContact {
+  height: 100%;
+  overflow-y: auto;
+}
+.showContact .delete {
+  border: none;
+  background: #DE3931;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #fff;
+  float: right;
+}
+
+.addContact {
+  align-items: flex-start;
+}
+.addContact .form {
+  width: 100%;
+}
+.addContact .form div, .addContact .form .split, .addContact .form .split div input {
+  margin-bottom: 0;
+}
+
+.profile {
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+.profile__title {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F6F6F6;
+}
+.profile__title:nth-of-type(2) {
+  border-top: 1px solid #F6F6F6;
+  padding-top: 10px;
+  border-bottom: 0;
+}
+.profile__title h2 {
+  font-weight: 600;
+}
+.profile__title p {
+  margin-top: 5px;
+  color: #A9A9A9;
+}
+.profile .form__submit {
+  width: 30%;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.forgotPassword {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.forgotPassword h1 {
+  margin-bottom: 10px;
+}
+.forgotPassword a {
+  display: block;
+  margin-top: 10px;
+  color: #0083CA;
+  font-weight: 500;
+}
+.forgotPassword .step-one,
+.forgotPassword .step-two,
+.forgotPassword .step-three {
+  width: 300px;
+}
+.forgotPassword .step-one.hidden,
+.forgotPassword .step-two.hidden,
+.forgotPassword .step-three.hidden {
+  display: none;
+}
+.forgotPassword .step-three {
+  width: 350px;
+}
+.forgotPassword .step-two select {
+  margin-bottom: 10px;
+}
+.forgotPassword .step-two label {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.forgotPassword .step-two label button {
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+  color: #0083CA;
+  font-weight: 500;
+}
+.forgotPassword .step-two .question {
+  width: -moz-min-content;
+  width: min-content;
+  padding: 10px 15px;
+  border: none;
+  background-color: #F6F6F6;
+  border-radius: 10px;
+  font-family: inherit;
+  line-height: 1.5;
+  color: #A9A9A9;
+  font-size: 13.3333px;
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid transparent;
+  margin-bottom: 15px;
+}
+
+.login, .register, .showContact, .addContact, .profile {
+  overflow-y: auto;
+}
+.login::-webkit-scrollbar-track, .register::-webkit-scrollbar-track, .showContact::-webkit-scrollbar-track, .addContact::-webkit-scrollbar-track, .profile::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+.login::-webkit-scrollbar, .register::-webkit-scrollbar, .showContact::-webkit-scrollbar, .addContact::-webkit-scrollbar, .profile::-webkit-scrollbar {
+  width: 10px;
+  background-color: #D1D1D1;
+}
+.login::-webkit-scrollbar-thumb, .register::-webkit-scrollbar-thumb, .showContact::-webkit-scrollbar-thumb, .addContact::-webkit-scrollbar-thumb, .profile::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #D1D1D1;
+}

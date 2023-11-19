@@ -1,0 +1,33 @@
+.profile {
+	height: 100%;
+	overflow-y: scroll;
+	padding-right: 10px;
+
+	&__title {
+		margin-bottom: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid $grey-1;
+
+		&:nth-of-type(2) {
+			border-top: 1px solid $grey-1;
+			padding-top: 10px;
+			border-bottom: 0;
+		}
+
+		h2 {
+			@extend %content-body;
+			font-weight: 600;
+		}
+		p {
+			@extend %content-label;
+			margin-top: 5px;
+			color: $grey-3;
+		}
+	}
+	
+	.form__submit {
+		width: 30%;
+		margin-left: auto;
+		margin-bottom: 20px;
+	}
+}

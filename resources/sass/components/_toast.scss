@@ -1,0 +1,19 @@
+.toast {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: auto;
+	padding: 10px;
+	border-radius: 10px;
+	@extend %content-label;
+	font-weight: 500;
+	opacity: 0;
+
+	&.toast--success {
+		background-color: #C9F39E;
+	}
+
+	&.toast--error {
+		background-color: #DC7B69;
+	}
+}

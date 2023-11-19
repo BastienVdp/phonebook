@@ -1,0 +1,16 @@
+.showContact {
+	height: 100%;
+	overflow-y: auto;
+	.delete {
+		border: none;
+		background: #DE3931;
+		padding: 5px 10px;
+		margin-bottom: 10px;
+		border-radius: 10px;
+		font-family: inherit;
+		font-weight: 500;
+		color: $white;
+		float: right;
+	}
+
+}

@@ -1,0 +1,254 @@
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+	.split {
+		display: flex;
+		gap: 15px;
+		margin-bottom: 0;
+		div {
+			flex: 1;
+		}
+	}
+
+	.form__submit {
+		padding: 10px 15px;
+		border: 0;
+		border-radius: 5px;
+		font-family: inherit;
+		font-weight: 600;
+		letter-spacing: .5px;
+		line-height: 1.5;
+		color: $white;
+		width: 100%;
+		background-color: $primary;
+		cursor: pointer;
+		transition: all .3s ease-in-out;
+		margin-top: 5px;
+	}
+
+	div {
+		p {
+			@extend %content-caption;
+			color: $red;
+			margin: 10px 0 5px 0;
+			line-height: 1.2;
+		}
+		label {
+			@extend %content-label;
+			margin-bottom: 5px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			button {
+				background-color: transparent;
+				border: none;
+				text-decoration: none;
+				color: $primary;
+				font-weight: 500;
+			}
+		}
+
+		input {
+			&[type="text"], &[type="email"], &[type="password"] {
+				padding: 10px 15px;
+				border: none;
+				background-color: $grey-1;
+				border-radius: 10px;
+				font-family: inherit;
+				line-height: 1.5;
+				color: $black;
+				width: 100%;
+				margin-top: 5px;
+				border: 1px solid transparent;
+
+				&::placeholder {
+					color: $grey-3;
+				}
+				&:focus {
+					outline: none;
+				}
+			}		
+		}
+
+		select {
+			padding: 10px 15px;
+			border: none;
+			background-color: $grey-1;
+			border-radius: 10px;
+			font-family: inherit;
+			line-height: 1.5;
+			color: $grey-3;
+			width: 100%;
+			cursor: pointer;
+			border-right: 16px solid transparent;
+		
+			&:focus {
+				outline: none;
+			}
+		}
+
+		select, input[type="text"], input[type="email"], input[type="password"] {
+			&.error {
+				animation: shake .3s ease-in-out;
+			}
+		}
+
+		.switch {
+			position: relative;
+			display: inline-block;
+			margin-top: 5px;
+		
+		  
+			> span {
+			  position: absolute;
+			  top: 8px;
+			  @extend %content-caption;
+			  font-weight: 500;
+			  pointer-events: none;
+			  text-transform: uppercase;
+			  text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+			  width: 50%;
+			  text-align: center;
+		
+			  &.on {
+				left: 0;
+				padding-left: 2px;
+				color: white;
+			  }
+			
+			  &.off {
+				right: 0;
+				padding-right: 4px;
+				color: $black;
+			  }
+			}
+		
+			input.check-toggle-round-flat:checked ~ .off {
+				color: white;
+			  }
+			
+			  input.check-toggle-round-flat:checked ~ .on {
+				color: $black;
+			  }
+		  
+		  
+			
+		  
+			.check-toggle {
+			  position: absolute;
+			  margin-left: -9999px;
+			  visibility: hidden;
+			}
+		  
+			.check-toggle + label {
+			  display: block;
+			  position: relative;
+			  cursor: pointer;
+			  outline: none;
+			  -webkit-user-select: none;
+			  -moz-user-select: none;
+			  -ms-user-select: none;
+			  user-select: none;
+			}
+		  
+			input.check-toggle-round-flat + label {
+			  padding: 2px;
+			  width: 97px;
+			  height: 34px;
+			  background-color: $grey-1;
+			  -webkit-border-radius: 60px;
+			  -moz-border-radius: 60px;
+			  -ms-border-radius: 60px;
+			  -o-border-radius: 60px;
+			  border-radius: 60px;
+			}
+		  
+			input.check-toggle-round-flat + label:before,
+			input.check-toggle-round-flat + label:after {
+			  display: block;
+			  position: absolute;
+			  content: "";
+			}
+		  
+			input.check-toggle-round-flat + label:before {
+			  top: 2px;
+			  left: 2px;
+			  bottom: 2px;
+			  right: 2px;
+			  background-color: $grey-1;
+			  border-radius: 60px;
+			}
+		  
+			input.check-toggle-round-flat + label:after {
+			  top: 4px;
+			  left: 4px;
+			  bottom: 4px;
+			  width: 46px;
+			  background-color: $black;
+			  -webkit-border-radius: 52px;
+			  -moz-border-radius: 52px;
+			  -ms-border-radius: 52px;
+			  -o-border-radius: 52px;
+			  border-radius: 52px;
+			  -webkit-transition: margin 0.2s;
+			  -moz-transition: margin 0.2s;
+			  -o-transition: margin 0.2s;
+			  transition: margin 0.2s;
+			}
+		  
+			input.check-toggle-round-flat:checked + label {
+			}
+		  
+			input.check-toggle-round-flat:checked + label:after {
+			  margin-left: 44px;
+			}
+		}
+	  
+		.file-input {
+			position: relative;
+			padding: 8px 15px;
+			border: none;
+			background-color: #dcdcdc; // Remplace par la couleur appropriée
+			border-radius: 10px;
+			line-height: 1.5;
+			width: 100%;
+			margin-top: 5px;
+			border: 1px solid transparent;
+			overflow: hidden;
+			border-radius: 10px;
+			background-color: $grey-1;
+			color: $grey-3;
+
+			span {
+				@extend %content-label;
+				color: $grey-3;
+				font-weight: 400;
+			}
+			input[type="file"] {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				cursor: pointer;
+			}
+			&:focus {
+				outline: none;
+			}
+
+			&::placeholder {
+				color: $grey-3; // Couleur du texte de l'placeholder
+			}
+			
+		}
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.form {
+		width: 100%!important;
+	}
+}

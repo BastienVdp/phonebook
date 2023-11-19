@@ -1,0 +1,45 @@
+.categories__component {
+	display: flex;
+	gap: 1rem;
+	width: 100%;
+	margin-top: 15px;
+	overflow-x: scroll;
+	padding-bottom: .75rem;
+	flex: none;
+
+	&::-webkit-scrollbar-track
+	{
+		background-color: #{$white};
+		display: none;
+	}
+	
+	&::-webkit-scrollbar
+	{
+		height: 0px;
+		background-color: #{$grey-2};
+	}
+	
+	&::-webkit-scrollbar-thumb
+	{
+		border-radius: 10px;
+		background-color: #{$grey-2};
+	}
+	
+	&__item {
+		width: min-content;
+		line-height: 32px;
+		height: 32px;
+		background-color: #{$grey-1};
+		border-radius: 100px;
+		padding: 0 12px;
+		cursor: pointer;
+		@extend %content-label;
+		font-weight: 600;
+
+		&.active {
+			background-color: #{$black};
+			color: #{$white};
+		}
+	}
+}
+ 

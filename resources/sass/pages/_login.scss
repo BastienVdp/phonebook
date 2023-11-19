@@ -1,0 +1,22 @@
+.login, .register, .addContact {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	h1 {
+		@extend %title-1;
+	}
+
+	.form {
+		width: 280px;
+	}
+
+	a {
+		color: $primary;
+		font-weight: 500;
+	}
+}
+
+

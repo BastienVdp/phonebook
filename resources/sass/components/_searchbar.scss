@@ -1,0 +1,31 @@
+.search {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px 10px 5px 15px;
+	background-color: #{$grey-1};
+	border-radius: 10px;
+
+	&__input {
+		width: 100%;
+		height: 100%;
+		border: none;
+		background-color: transparent;
+		@extend %content-caption;
+		font-family: inherit;
+		color: $black;
+		outline: none;
+	}
+	&__button {
+		width: 32px;
+		height: 32px;
+		border: none;
+		background-color: transparent;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+}
+  
+  

@@ -1,0 +1,54 @@
+*, *::after, *::before {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Goldplay', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--clr-black);
+	height: 100vh;
+	overflow: hidden;
+	--header-height: 60px;
+} 
+
+.app {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 10px 25px 20px 25px;
+}
+
+@media screen and (max-width: 320px) {
+	.app {
+		padding: 10px;
+	}
+}
+
+.content {
+	position: relative;
+	width: 100%;
+	height: calc(100% - var(--header-height));
+}
+
+@media screen and (min-width: 768px) {
+	.app {
+		position: relative;
+		max-width: 768px;
+		margin: 0 auto;
+	}
+}
+button {
+	cursor: pointer;
+	font-family: inherit;
+}
+
+button.form__submit:disabled {
+	cursor: not-allowed!important;
+  	pointer-events: all !important;
+}
+
