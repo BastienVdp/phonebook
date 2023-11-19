@@ -14,6 +14,8 @@
 - All controllers in the app/Controllers folder
 - All actions in the app/Actions folder
 - All models in the app/Models folder
+- All migrations in the database/migrations folder
+- All factories in the database/factories folder (+ add your factories in the database/seeders/DatabaseSeeder)
 - All routes in the routes folder
 - All assets in the resources folder
 - All views in the resources/views folder
