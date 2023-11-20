@@ -3075,8 +3075,10 @@ var Toast = /*#__PURE__*/function () {
         ease: 'power2.out'
       });
       if (type === 'error') {
+        this.element.classList.remove('toast--success');
         this.element.classList.add('toast--error');
       } else {
+        this.element.classList.remove('toast--error');
         this.element.classList.add('toast--success');
       }
       this.element.innerHTML = message;

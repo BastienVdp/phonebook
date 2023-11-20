@@ -15,9 +15,10 @@ class Request
     {
         if ($this->isGet()) {
             foreach ($_GET as $key => $value) {
-                $this->body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+                $this->params[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS); 
             }
         }
+
         if ($this->isPost()) {
             if($this->isJson()) {
                 $this->body = json_decode(file_get_contents('php://input'), true);
@@ -43,9 +44,8 @@ class Request
      */
     public function getPath(): string
     {
-        $path = $_SERVER['REQUEST_URI']; 
-        // $path = str_replace('/', '', $path);
-        $position = strpos($path, '?'); 
+        $path = $_SERVER['REQUEST_URI']; // on récupère l'url
+        $position = strpos($path, '?'); // 
     
         return $position ? substr($path, 0, $position) : $path; 
     }
@@ -118,17 +118,4 @@ class Request
     {
         return $this->params ?? null;
     } 
-
-    private function findFileKey($data) {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $fileKey = $this->findFileKey($value);
-                if ($fileKey !== null) {
-                    return $key;
-                }
-            }
-        }
-        
-        return null;
-    }
 }

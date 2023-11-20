@@ -10,24 +10,24 @@ class Validation
         $errors = [];
 
         foreach ($rules as $key => $rule) {
-            $value = $request->body[$key] ?? null;
+            $value = $request->body[$key] ?? null; // On récupère la valeur du champ
 
-            $ruleParts = explode('|', $rule);
+            $ruleParts = explode('|', $rule); // On récupère les règles de validation sous forme de tableau
 
-            foreach ($ruleParts as $rulePart) {
-                $ruleDetails = explode(':', $rulePart);
+            foreach ($ruleParts as $rulePart) { // On parcourt les règles de validation
+                $ruleDetails = explode(':', $rulePart); // On récupère le nom de la règle et sa valeur éventuelle sous forme de tableau
 
-                $ruleName = $ruleDetails[0];
-                $ruleValue = $ruleDetails[1] ?? null;
+                $ruleName = $ruleDetails[0]; // On récupère le nom de la règle
+                $ruleValue = $ruleDetails[1] ?? null; // On récupère la valeur de la règle
 
-                $methodName = 'validate' . ucfirst($ruleName);
+                $methodName = 'validate' . ucfirst($ruleName); // On crée le nom de la méthode de validation avec cette règle
 
-                if (method_exists(self::class, $methodName)) {
-                    self::$labels = $model::getLabels();
-                    $error = self::$methodName($value, $ruleValue, $key, $request, $model);
-                    if ($error) {
-                        $errors[$key] = $error;
-                        break;
+                if (method_exists(self::class, $methodName)) { // On vérifie si la méthode existe
+                    self::$labels = $model::getLabels(); // On récupère les labels du modèle
+                    $error = self::$methodName($value, $ruleValue, $key, $request, $model); // On exécute la méthode de validation
+                    if ($error) { // Si la méthode de validation retourne une erreur
+                        $errors[$key] = $error; // On ajoute l'erreur au tableau des erreurs
+                        break; // On arrête la boucle
                     }
                 }
             }
@@ -36,7 +36,7 @@ class Validation
         return $errors;
     }
 
-    private static function validateRequired($value, $ruleValue, $key, $request)
+    private static function validateRequired($value, $ruleValue, $key, $request, $model)
     {
         if ($value === null || $value === '') {
             $key = str_replace('_confirmation', '', $key);
@@ -46,7 +46,7 @@ class Validation
         return null;
     }
 
-    private static function validateMin($value, $ruleValue, $key, $request)
+    private static function validateMin($value, $ruleValue, $key, $request, $model)
     {
         if (strlen($value) < $ruleValue) {
             return 'Le champ ' . strtolower(self::$labels[$key]) . ' doit avoir au minimum <b>' . $ruleValue . '</b> caractères.';
@@ -55,7 +55,7 @@ class Validation
         return null;
     }
 
-    private static function validateMax($value, $ruleValue, $key, $request)
+    private static function validateMax($value, $ruleValue, $key, $request, $model)
     {
         if (strlen($value) > $ruleValue) {
             return 'Le champ ' . strtolower(self::$labels[$key]) . ' doit avoir au maximum <b>' . $ruleValue . '</b> caractères.';
@@ -64,7 +64,7 @@ class Validation
         return null;
     }
 
-    private static function validateEmail($value, $ruleValue, $key, $request)
+    private static function validateEmail($value, $ruleValue, $key, $request, $model)
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             return 'Le champ ' . strtolower(self::$labels[$key]) . ' doit être une adresse e-mail valide.';
@@ -84,7 +84,7 @@ class Validation
         return null;
     }
 
-    private static function validateConfirmed($value, $ruleValue, $key, $request)
+    private static function validateConfirmed($value, $ruleValue, $key, $request, $model)
     {
         $confirmationKey = str_replace('_confirmation', '', $key);
         if ($value !== $request->body[$confirmationKey]) {
@@ -94,7 +94,7 @@ class Validation
         return null;
     }
 
-    private static function validateNumeric($value, $ruleValue, $key, $request)
+    private static function validateNumeric($value, $ruleValue, $key, $request, $model)
     {
         if (!is_numeric($value)) {
             return 'Le champ ' . strtolower(self::$labels[$key]) . ' doit être un nombre.';
@@ -103,7 +103,7 @@ class Validation
         return null;
     }
 
-    private static function validateImage($value, $ruleValue, $key, $request)
+    private static function validateImage($value, $ruleValue, $key, $request, $model)
     {
         if (!is_array($value) || !isset($value['tmp_name'])) {
             // Si le champ est null, aucune validation nécessaire

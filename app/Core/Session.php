@@ -8,20 +8,19 @@ use Lcobucci\JWT\Exception;
 
 class Session
 {
-    public function __construct($config)
+    public function __construct()
     {
         session_start();
-        $flash_messages = $_SESSION[$config['flash_key']] ?? [];
+        $flash_messages = $_SESSION['flash_key'] ?? [];
         foreach($flash_messages as $key => &$flash_messages) {
             $flash_messages['removed'] = true;
         }
-        $_SESSION[$config['flash_key']] = $flash_messages;
+        $_SESSION['flash_key'] = $flash_messages;
     }
 
     public function setFlash(string $key, $value): void
     {
-        global $config; 
-        $_SESSION[$config['flash_key']][$key] = [
+        $_SESSION['flash_key'][$key] = [
         'removed' => false,
         'value' => $value
         ];
@@ -29,22 +28,19 @@ class Session
 
     public function getFlash(string $key): mixed
     {
-        global $config; 
-        return $_SESSION[$config['flash_key']][$key]['value'] ?? null;
+        return $_SESSION['flash_key'][$key]['value'] ?? null;
     }
 
     public function removeFlash(string $key): void
     {
-        global $config; 
-
-        $flash_messages = $_SESSION[$config['flash_key']] ?? [];
+        $flash_messages = $_SESSION['flash_key'] ?? [];
         
         foreach($flash_messages as $key => &$flash_messages) {
             if ($flash_messages['removed']) { unset($flash_messages[$key]);
             }
         }
 
-        $_SESSION[$config['flash_key']] = $flash_messages;
+        $_SESSION['flash_key'] = $flash_messages;
     }
 
     public function set(string $key, $value): void

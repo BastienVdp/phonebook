@@ -32,7 +32,7 @@ class Application
     public ?User $user = null;
     public ?string $token = null;
     
-    public function __construct(string $path, array $config, bool $isApi = false)
+    public function __construct(string $path, array $config)
     {
         self::$root_dir = $path;
         self::$app = $this;
@@ -41,7 +41,7 @@ class Application
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
         $this->database = new Database($config['database']);
-        $this->session = new Session($config['session']);
+        $this->session = new Session();
 
         if (Application::$app->session->get('user')) {
             $this->user = Application::$app->session->get('user');

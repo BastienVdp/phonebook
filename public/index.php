@@ -23,8 +23,7 @@ $config = require '../app/config.php';
 
 $app = new App\Core\Application(
 	dirname(__DIR__),
-	$config,
-	true
+	$config
 );
 
 require '../routes/api.php';

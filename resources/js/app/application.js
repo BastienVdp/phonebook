@@ -32,6 +32,7 @@ export default class Application
 		this.content = document.querySelector('.content');
 		this.template = this.content.getAttribute('data-template');
 		this.path = null;
+		
 		this.createTransition();
 		this.createHeader();
 		this.initPages();

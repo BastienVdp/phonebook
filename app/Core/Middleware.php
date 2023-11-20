@@ -18,10 +18,9 @@ abstract class Middleware
     public static function runMiddlewares(array $middlewares, Request $request): void
     {
         foreach ($middlewares as $middleware) {
-
-                if (in_array(Application::$app->router->action, $middleware['actions'])) {
-                    (new $middleware['class'])->execute($request);
-                }
+            if (in_array(Application::$app->router->action, $middleware['actions'])) { 
+                (new $middleware['class'])->execute($request);
+            }
         }
     }
 }
