@@ -19,7 +19,7 @@ class DatabaseSeeder
 
 	private function runSeeders()
 	{
-		$users = UserFactory::create(1);
+		$users = UserFactory::create(2);
 		ContactFactory::create(10, ['users' => $users]);
 	}
 }

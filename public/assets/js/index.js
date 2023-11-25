@@ -3834,11 +3834,7 @@ var Home = /*#__PURE__*/function (_Page) {
   function Home() {
     _classCallCheck(this, Home);
     return _super.call(this, {
-      element: '.home',
-      elements: {
-        searchInput: '.search__input',
-        searchButton: '.search__button'
-      }
+      element: '.home'
     });
   }
   _createClass(Home, [{

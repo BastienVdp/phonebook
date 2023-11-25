@@ -32,7 +32,7 @@ class Request
             }
         }
 
-        $this->headers = getallheaders();
+        // $this->headers = getallheaders();
     }
 
 
@@ -58,7 +58,7 @@ class Request
      */
     public function getMethod(): string
     {
-        return strtolower($_SERVER['REQUEST_METHOD']); 
+        return isset($_SERVER['REQUEST_METHOD']) ? strtolower($_SERVER['REQUEST_METHOD']) : ''; 
     }
 
     /**

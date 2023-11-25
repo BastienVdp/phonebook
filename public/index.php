@@ -21,10 +21,7 @@ require '../vendor/autoload.php';
 
 $config = require '../app/config.php';
 
-$app = new App\Core\Application(
-	dirname(__DIR__),
-	$config
-);
+$app = require_once __DIR__ . '/../app/bootstrap.php';
 
 require '../routes/api.php';
 

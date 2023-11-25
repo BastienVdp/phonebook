@@ -9,17 +9,17 @@ class UserFactory extends Factory
 {
 	public static $model = User::class;
 
-	public static function generate(): array
-	{
-		return [
+	public static function generate($dependencies, $overrides): array
+	{	
+		return array_replace([
 			'username' => 'Admin',
 			'name' => 'Admin',
 			'surname' => 'Admin',
-			'email' => 'admin@admin.be',
+			'email' => 'admin@admin.fr',
 			'password' => password_hash('password', PASSWORD_DEFAULT),
-			'admin' => 1,
+			'admin' => 0,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
-		];
+		], $overrides);
 	}
 }

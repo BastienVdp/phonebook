@@ -9,10 +9,6 @@ export default class Home extends Page
 	{
 		super({
 			element: '.home',
-			elements: {
-				searchInput: '.search__input',
-				searchButton: '.search__button',
-			}
 		});
 	}
 

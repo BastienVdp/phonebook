@@ -6,6 +6,11 @@
             "Database\\": "database/"
         }
     },
+    "scripts": {
+        "test": [
+            "php -d memory_limit=-1 ./vendor/bin/pest"
+        ]
+    },
     "authors": [
         {
             "name": "BastienVdp",
@@ -13,10 +18,15 @@
         }
     ],
     "require-dev": {
-        "fakerphp/faker": "^1.23"
+        "fakerphp/faker": "^1.23",
+        "pestphp/pest": "^2.24"
     },
     "require": {
         "firebase/php-jwt": "^6.9"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
-
 }

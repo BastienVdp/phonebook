@@ -12,6 +12,7 @@ class Factory
 {
 	public static \PDO $pdo;
 	public static $faker;
+	protected static bool $testMode = false;
 
 	/**
 	 * The function initializes the PDO object and creates a FakerFactory object.
@@ -38,17 +39,23 @@ class Factory
 	 * @return the result of the `save` method, which is called with the `` array as an
 	 * argument.
 	 */
-	public static function create(int $count = 1, array $dependencies = [])
+	public static function create(int $count = 1,  array $dependencies = [], array $overrides = [])
 	{
 		$factories = [];
 
 		for($i = 0; $i < $count; $i++) {
-			$factories[] = static::class::generate($dependencies);
+			$factories[] = static::class::generate($dependencies, $overrides);
 		}
 	
-		return self::save($factories);
-	}
+		$createdRecords = self::save($factories);
 
+		if($count === 1) {
+			return $createdRecords[0];
+		}
+
+		return $createdRecords;
+	}
+ 
 	/**
 	 * The function saves an array of factories into a database table and returns all the records.
 	 * 
@@ -60,30 +67,51 @@ class Factory
 	 */
 	public static function save($factories): array
 	{
+		if (self::$testMode) {
+			return $factories; 
+		}
+	
 		$table = static::class::$model::getTable();
 		$columns = implode(', ', array_keys($factories[0]));
-		$values = implode(', ', array_map(function($factory) {
-			return '('. implode(', ', array_map(function($value) {
+		$values = implode(', ', array_map(function ($factory) {
+			return '(' . implode(', ', array_map(function ($value) {
 				return "'$value'";
-			}, $factory)) .')';
+			}, $factory)) . ')';
 		}, $factories));
-
+	
 		$sql = "INSERT INTO $table ($columns) VALUES $values";
-
+	
 		$statement = self::$pdo->prepare($sql);
 		$statement->execute();
-		
-		return self::getRecords();
+	
+		// Récupérer les enregistrements ajoutés
+		$newRecords = self::getRecordsByColumns($columns, $values);
+	
+		return $newRecords;
 	}
 
-	public static function getRecords(): array
+	private static function getRecordsByColumns($columns, $values): array
 	{
 		$table = static::class::$model::getTable();
-		$sql = "SELECT * FROM $table";
+		$sql = "SELECT * FROM $table WHERE ($columns) IN ($values)";
 
 		$statement = self::$pdo->prepare($sql);
 		$statement->execute();
 
-		return $statement->fetchAll();
+		return $statement->fetchAll(\PDO::FETCH_OBJ);
+	}
+
+	public static function enableTestMode()
+	{
+		self::$testMode = true;
+	}
+
+	public static function clean()
+	{
+		$table = static::class::$model::getTable();
+		$sql = "DELETE FROM $table";
+
+		$statement = self::$pdo->prepare($sql);
+		$statement->execute();
 	}
 }
