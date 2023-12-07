@@ -15,7 +15,7 @@ class UserFactory extends Factory
 			'username' => 'Admin',
 			'name' => 'Admin',
 			'surname' => 'Admin',
-			'email' => 'admin@admin.fr',
+			'email' => 'admin@admin.be',
 			'password' => password_hash('password', PASSWORD_DEFAULT),
 			'admin' => 0,
 			'created_at' => date('Y-m-d H:i:s'),

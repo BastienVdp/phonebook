@@ -2113,11 +2113,6 @@ var Application = /*#__PURE__*/function () {
     this.content = document.querySelector('.content');
     this.template = this.content.getAttribute('data-template');
     this.path = null;
-    this.createTransition();
-    this.createHeader();
-    this.initPages();
-    this.initLinks();
-    this.initToast();
     window.onpopstate = function () {
       _this.onChange({
         url: window.location.pathname,
@@ -2125,11 +2120,19 @@ var Application = /*#__PURE__*/function () {
       });
     };
   }
-
-  /**
-   * The function initializes a new instance of the Toast class.
-   */
   _createClass(Application, [{
+    key: "init",
+    value: function init() {
+      this.createTransition();
+      this.createHeader();
+      this.initPages();
+      this.initLinks();
+      this.initToast();
+    }
+    /**
+     * The function initializes a new instance of the Toast class.
+     */
+  }, {
     key: "initToast",
     value: function initToast() {
       this.toast = new _components_Toast__WEBPACK_IMPORTED_MODULE_9__["default"]();
@@ -2262,8 +2265,6 @@ var Application = /*#__PURE__*/function () {
                   _this3.transition.hide();
                 }
                 _this3.initLinks();
-              })["catch"](function (e) {
-                console.log(e);
               });
             case 10:
             case "end":
@@ -2281,6 +2282,7 @@ var Application = /*#__PURE__*/function () {
     value: function setPath(path) {
       this.path = path.replace(/\/$/, '');
     }
+
     /**
      * The function checks if the user is authenticated and redirects to the homepage if not.
      * @returns nothing (undefined).
@@ -2289,7 +2291,7 @@ var Application = /*#__PURE__*/function () {
     key: "checkAuth",
     value: function checkAuth() {
       if (!this.isConnected()) {
-        window.location.href = '/';
+        window.location.href = '/login';
         return;
       }
     }
@@ -2344,7 +2346,7 @@ var Application = /*#__PURE__*/function () {
     value: function logout() {
       localStorage.removeItem('token');
       this.onChange({
-        url: '/'
+        url: '/login'
       });
       return;
     }
@@ -2516,10 +2518,16 @@ var Contacts = /*#__PURE__*/function (_Component) {
   }, {
     key: "search",
     value: function search(query) {
+      var _this2 = this;
       var filteredContacts = this.data.filter(function (item) {
-        return item.name.toLowerCase().includes(query.toLowerCase());
+        return _this2.isLike(item.name, query) || _this2.isLike(item.surname, query) || _this2.isLike(item.phone, query);
       });
       this.renderComponent(filteredContacts);
+    }
+  }, {
+    key: "isLike",
+    value: function isLike(item, query) {
+      return item.toLowerCase().includes(query.toLowerCase());
     }
   }, {
     key: "filter",
@@ -2562,7 +2570,7 @@ var Contacts = /*#__PURE__*/function (_Component) {
     key: "getContacts",
     value: function () {
       var _getContacts = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var _this2 = this;
+        var _this3 = this;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
@@ -2572,8 +2580,8 @@ var Contacts = /*#__PURE__*/function (_Component) {
                   if (_typeof(response.data.contacts) === 'object' && !Array.isArray(response.data.contacts)) {
                     response.data.contacts = [response.data.contacts];
                   }
-                  _this2.data = response.data.contacts;
-                  _this2.renderComponent(_this2.data);
+                  _this3.data = response.data.contacts;
+                  _this3.renderComponent(_this3.data);
                 }
               });
             case 2:
@@ -2614,10 +2622,10 @@ var Contacts = /*#__PURE__*/function (_Component) {
   }, {
     key: "removeAllListeners",
     value: function removeAllListeners() {
-      var _this3 = this;
-      document.querySelectorAll('.contacts__component__item').forEach(function (item, key) {
+      var _this4 = this;
+      document.querySelectorAll('.contacts__component__item').forEach(function (item) {
         item.removeEventListener('click', function () {
-          _this3.clickOnItem(item);
+          _this4.clickOnItem(item);
         });
       });
     }
@@ -2644,15 +2652,16 @@ var ContactItem = /*#__PURE__*/function () {
   }, {
     key: "addEventsListeners",
     value: function addEventsListeners() {
-      var _this4 = this;
+      var _this5 = this;
       this.container.addEventListener('click', function () {
-        _this4.openContact();
+        _this5.openContact();
       });
     }
   }, {
     key: "create",
     value: function create() {
-      return this.container.innerHTML = "\n\t\t\t<div class=\"contacts__component__item__image\">\n\t\t\t\t<img src=\"/images/contacts/".concat(this.item.image, "\" alt=\"").concat(this.item.name, "\">\n\t\t\t</div>\n\t\t\t<div class=\"contacts__component__item__informations\">\n\t\t\t\t<div class=\"contacts__component__item__informations__fullname\">").concat(this.item.name, "</div>\n\t\t\t\t<div class=\"contacts__component__item__informations__phone\">").concat(this.item.phone, "</div>\n\t\t\t\t<div class=\"contacts__component__item__informations__category\">").concat(this.item.category, "</div>\n\t\t\t\t<div class=\"contacts__component__item__informations__favorite\">\n\t\t\t\t\t").concat(this.item.favorite === 1 ? '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/></svg>', "\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t");
+      console.log(this.item);
+      return this.container.innerHTML = "\n\t\t\t<div class=\"contacts__component__item__image\">\n\t\t\t\t<img src=\"/images/contacts/".concat(this.item.image, "\" alt=\"").concat(this.item.name, "\">\n\t\t\t</div>\n\t\t\t<div class=\"contacts__component__item__informations\">\n\t\t\t\t<div class=\"contacts__component__item__informations__fullname\">").concat(this.item.name, " ").concat(this.item.surname, "</div>\n\t\t\t\t<div class=\"contacts__component__item__informations__phone\">").concat(this.item.phone, "</div>\n\t\t\t\t<div class=\"contacts__component__item__informations__category\">").concat(this.item.category, "</div>\n\t\t\t\t").concat(this.item.favorite === 1 ? "\n\t\t\t\t<div class=\"contacts__component__item__informations__favorite\">\n\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"1em\" viewBox=\"0 0 512 512\"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d=\"M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z\"/></svg>' \n\n\t\t\t\t</div>" : '', "\n\n\t\t\t</div>\n\t\t");
     }
   }]);
   return ContactItem;
@@ -3716,7 +3725,7 @@ var ForgotPassword = /*#__PURE__*/function (_Page) {
           });
           setTimeout(function () {
             _this2.app.onChange({
-              url: '/'
+              url: '/login'
             }, 3000);
           });
         }
@@ -4532,7 +4541,7 @@ axiosClient.interceptors.response.use(function (response) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_application_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/app/application.js */ "./resources/js/app/application.js");
 
-new _app_application_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+new _app_application_js__WEBPACK_IMPORTED_MODULE_0__["default"]().init();
 
 /***/ }),
 

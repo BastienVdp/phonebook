@@ -1,3 +1,3 @@
 import Application from "@/app/application.js";
 
-new Application()
+(new Application()).init();

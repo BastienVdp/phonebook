@@ -20,7 +20,7 @@
 					</button>
 				</form>
 				<p>
-					<a href="/">Retour </a>
+					<a href="/login">Retour </a>
 				</p>
 			</div>
 			<div class="step-two hidden">

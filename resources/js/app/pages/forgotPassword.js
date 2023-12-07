@@ -71,7 +71,7 @@ export default class ForgotPassword extends Page
 				})
 				setTimeout(() => {
 					this.app.onChange({
-						url: '/'
+						url: '/login'
 					}, 3000)
 				})
 			}

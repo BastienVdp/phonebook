@@ -1,8 +1,7 @@
-<?php 
+<?php
 
 namespace App\Core;
 
-use stdClass;
 use App\Core\Router;
 use App\Models\User;
 use App\Core\Request;
@@ -16,13 +15,13 @@ use App\Core\Response;
  * database connection, session management,
  * and user authentication functionality. 
  */
+
 class Application
 {
-	private string $key = 'gB8Mb1GrBYnK6ZuHahPtWgVFGj3wLytr';
-
     public static $root_dir;
     public static $app;
-
+    public string $key;
+    
     public Request $request;
     public Response $response;
     public Router $router;
@@ -31,11 +30,12 @@ class Application
     public Session $session;
     public ?User $user = null;
     public ?string $token = null;
-    
+
     public function __construct(string $path, array $config)
     {
         self::$root_dir = $path;
         self::$app = $this;
+        $this->key = $config['jwt_key'];
 
         $this->request = new Request();
         $this->response = new Response();
@@ -70,7 +70,7 @@ class Application
     {
         self::$app->router->get($path, $callback);
     }
-    
+
     /**
      * The function "post" is used to register a POST route with a specified path and callback function
      * in a PHP application.
@@ -154,9 +154,9 @@ class Application
             'exp' => time() + (60 * 60 * 24), // Expiration après 1 heure
             'user' => $user, // Ajouter d'autres claims
         ];
-    
+
         $jwt = JWT::encode($token, $this->key, 'HS256');
-    
+
         return $jwt;
     }
 }

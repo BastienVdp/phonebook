@@ -2,14 +2,14 @@
 
 namespace App\Middlewares;
 
-use App\Core\Middleware;
-
 use Firebase\JWT\JWT;
+
 use Firebase\JWT\Key;
+use App\Core\Middleware;
+use App\Core\Application;
 
 class VerifyTokenMiddleware extends Middleware
 {
-	private string $key = 'gB8Mb1GrBYnK6ZuHahPtWgVFGj3wLytr';
 
     public function execute($request): void
     {
@@ -27,7 +27,7 @@ class VerifyTokenMiddleware extends Middleware
 		try {
 
 			$token = str_replace('Bearer ', '', $token);
-			$jwt = JWT::decode($token, new Key($this->key, 'HS256'));
+			$jwt = JWT::decode($token, new Key(Application::$app->key, 'HS256'));
 			$request->merge(['user' => $jwt->user]);
 		
 		} catch(\Exception $e) {

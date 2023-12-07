@@ -76,7 +76,7 @@
 				<button type="submit" class="form__submit">S'inscrire</button>
 			</form>
 			<p>
-				Déjà inscrit ? <a href="/">Connectez-vous</a>
+				Déjà inscrit ? <a href="/login">Connectez-vous</a>
 			</p>
 		</div>
 	</div>

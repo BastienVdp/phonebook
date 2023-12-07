@@ -33,12 +33,6 @@ export default class Application
 		this.template = this.content.getAttribute('data-template');
 		this.path = null;
 		
-		this.createTransition();
-		this.createHeader();
-		this.initPages();
-		this.initLinks();
-		this.initToast();
-
 		window.onpopstate = () => {
 			this.onChange({
 				url: window.location.pathname,
@@ -47,6 +41,14 @@ export default class Application
 		}
 	}
 
+	init()
+	{
+		this.createTransition();
+		this.createHeader();
+		this.initPages();
+		this.initLinks();
+		this.initToast();
+	}
 	/**
 	 * The function initializes a new instance of the Toast class.
 	 */
@@ -183,15 +185,13 @@ export default class Application
 	
 				this.initLinks();
 			})
-			.catch(e => {
-				console.log(e);
-			})
 	}
 
 	setPath(path)
 	{
 		this.path = path.replace(/\/$/, '');
 	}
+	
 	/**
 	 * The function checks if the user is authenticated and redirects to the homepage if not.
 	 * @returns nothing (undefined).
@@ -199,7 +199,7 @@ export default class Application
 	checkAuth()
 	{
 		if(!this.isConnected()) {
-			window.location.href = '/';
+			window.location.href = '/login';
 			return;
 		}
 	}
@@ -250,8 +250,9 @@ export default class Application
 		localStorage.removeItem('token');
 		
 		this.onChange({
-			url: '/'
+			url: '/login'
 		})
+
 		return;
 	}
 }

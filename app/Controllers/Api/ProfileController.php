@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace App\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Question;
 
 use App\Core\Request;
 use App\Core\Response;
@@ -13,20 +14,19 @@ use App\Actions\User\UpdatePasswordAction;
 use App\Actions\User\UpdateInformationsAction;
 
 use App\Middlewares\VerifyTokenMiddleware;
-use App\Models\Question;
 
 class ProfileController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->registerMiddleware(
-            [
-                "class" => VerifyTokenMiddleware::class,
-                "actions" => ["index", "update", "updatePassword", "storeQuestions"]
-            ]
-        );
-    }
+	public function __construct()
+	{
+		$this->registerMiddleware(
+			[
+				"class" => VerifyTokenMiddleware::class,
+				"actions" => ["index", "update", "updatePassword", "storeQuestions"]
+			]
+		);
+	}
 
 	public function index(Request $request, Response $response)
 	{
@@ -36,21 +36,21 @@ class ProfileController extends Controller
 		], 200);
 	}
 
-    public function update(Request $request, Response $response)
-    {
+	public function update(Request $request, Response $response)
+	{
 		$errors = Validation::validate($request, [
 			"name" => "required",
 			"surname" => "required",
-			"email" => $request->user()->email !== $request->body["email"] ? 
-							"required|email|unique:email" : 
-							"required|email",
-			"username" => $request->user()->username !== $request->body["username"] ? 
-							"required|unique:username" : 
-							"required",
+			"email" => $request->user()->email !== $request->body["email"] ?
+				"required|email|unique:email" :
+				"required|email",
+			"username" => $request->user()->username !== $request->body["username"] ?
+				"required|unique:username" :
+				"required",
 		], User::class);
 
-		if(empty($errors)) {
-			if($token = (new UpdateInformationsAction())->execute(
+		if (empty($errors)) {
+			if ($token = (new UpdateInformationsAction())->execute(
 				$request->body["name"],
 				$request->body["surname"],
 				$request->body["username"],
@@ -62,7 +62,7 @@ class ProfileController extends Controller
 					"message" => "Votre profil a bien été modifié.",
 					"token" => $token
 				], 200);
-			}			
+			}
 		} else {
 			return $response->jsonResponse([
 				'success' => false,
@@ -79,8 +79,8 @@ class ProfileController extends Controller
 			'newPassword_confirmation' => 'required|confirmed'
 		], User::class);
 
-		if(empty($errors)) {
-			if((new UpdatePasswordAction())->execute(
+		if (empty($errors)) {
+			if ((new UpdatePasswordAction())->execute(
 				$request->body['password'],
 				$request->body['newPassword'],
 				$request->user()
@@ -110,36 +110,38 @@ class ProfileController extends Controller
 		$rules = [];
 
 		if ($request->body["questions"]) {
-			foreach($request->body["questions"] as $key => $question) {
-				if($question === "") {
+			foreach ($request->body["questions"] as $key => $question) {
+				if ($question === "") {
 					$rules["question-" . $key + 1] = "required";
 				}
 			}
 		}
-		if($request->body["reponses"]) {
-			foreach($request->body["reponses"] as $key => $reponse) {
-				if($reponse === "") {
+		if ($request->body["reponses"]) {
+			foreach ($request->body["reponses"] as $key => $reponse) {
+				if ($reponse === "") {
 					$rules["reponse-" . $key + 1] = "required";
 				}
 			}
 		}
 
-		
-		$errors = Validation::validate($request, 
-			$rules
-		, Question::class);
 
-		if($errors) {
+		$errors = Validation::validate(
+			$request,
+			$rules,
+			Question::class
+		);
+
+		if ($errors) {
 			return $response->jsonResponse([
 				"success" => false,
 				"errors" => $errors
 			], 422);
 		} else {
 			$user = User::find(['id' => $request->user()->id]);
-			if($user->questions()) {
+			if ($user->questions()) {
 				Question::delete(['user_id' => $request->user()->id]);
 			}
-			foreach($request->body["questions"] as $key => $question) {
+			foreach ($request->body["questions"] as $key => $question) {
 				Question::create([
 					"question" => $question,
 					"reponse" => $request->body["reponses"][$key],
@@ -153,5 +155,4 @@ class ProfileController extends Controller
 			], 200);
 		}
 	}
-	
 }

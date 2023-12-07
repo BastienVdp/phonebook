@@ -8,6 +8,11 @@ use App\Core\Controller;
 class SiteController extends Controller
 {
 
+    public function landingPage()
+    {
+        return View::make('LandingPageView', layout: 'no-layout');
+    }
+
     public function homepage()
     {       
         return View::make('HomeView');

@@ -19,7 +19,7 @@ class ContactFactory extends Factory
 			'image' => 'default.png',
 			'category' => self::$faker->randomElement(['Amis', 'Famille', 'Travail']),
 			'favorite' => self::$faker->boolean ? 1 : 0,
-			'user_id' => self::$faker->randomElement($dependencies['users'])->id,
+			'user_id' => self::$faker->randomElement([$dependencies['users']])->id,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
 		];

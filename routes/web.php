@@ -1,4 +1,6 @@
 <?php 
+App\Core\Application::get('/', [App\Controllers\SiteController::class, 'landingPage']);
+
 App\Core\Application::get('/me', [App\Controllers\SiteController::class, 'homepage']);
 
 App\Core\Application::get('/contacts/{id}', [App\Controllers\SiteController::class, 'show']);
@@ -6,7 +8,8 @@ App\Core\Application::get('/contacts/create', [App\Controllers\SiteController::c
 
 App\Core\Application::get('/profile', [App\Controllers\SiteController::class, 'profile']);
 
-App\Core\Application::get('/', [App\Controllers\SiteController::class, 'login']);
+
+App\Core\Application::get('/login', [App\Controllers\SiteController::class, 'login']);
 App\Core\Application::get('/register', [App\Controllers\SiteController::class, 'register']);
 
 App\Core\Application::get('/forgot-password', [App\Controllers\SiteController::class, 'forgotPassword']);

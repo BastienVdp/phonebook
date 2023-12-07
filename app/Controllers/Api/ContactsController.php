@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controllers\Api;
 
@@ -35,13 +35,13 @@ class ContactsController extends Controller
             'success' => true,
             'contacts' => $contacts
         ], 200);
-    }   
+    }
 
     public function show(Request $request, Response $response)
     {
         $contact = Contact::find(['id' => $request->params['id'], 'user_id' => $request->user()->id]);
 
-        if(!$contact) {
+        if (!$contact) {
             return $response->jsonResponse([
                 'success' => false,
                 'message' => 'Le contact n\'existe pas.'
@@ -67,8 +67,8 @@ class ContactsController extends Controller
 
         $errors = Validation::validate($request, $rules, Contact::class);
 
-        if(empty($errors)) {
-            if(($callback = (new AddContactAction())->execute(
+        if (empty($errors)) {
+            if (($callback = (new AddContactAction())->execute(
                 $request->body['name'],
                 $request->body['surname'],
                 $request->body['email'],
@@ -78,7 +78,7 @@ class ContactsController extends Controller
                 $request->body['favorite'],
                 $request->user()->id
             ))) {
-                if(!isset($callback['errors'])) {
+                if (!isset($callback['errors'])) {
                     return $response->jsonResponse([
                         'success' => true,
                         'success' => $callback,
@@ -88,7 +88,7 @@ class ContactsController extends Controller
                         'success' => false,
                         'errors' => $callback['errors']
                     ], 422);
-                } 
+                }
             }
         } else {
             return $response->jsonResponse([
@@ -100,7 +100,7 @@ class ContactsController extends Controller
 
     public function update(Request $request, Response $response)
     {
-        if(!Contact::find(['id' => $request->params['id'], 'user_id' => $request->user()->id])) {
+        if (!Contact::find(['id' => $request->params['id'], 'user_id' => $request->user()->id])) {
             return $response->jsonResponse([
                 'success' => false,
                 'message' => 'Le contact n\'existe pas.'
@@ -116,7 +116,7 @@ class ContactsController extends Controller
             'favorite' => 'required'
         ], Contact::class);
 
-        if(empty($errors)) {
+        if (empty($errors)) {
             (new UpdateContactAction())->execute(
                 $request->body['name'],
                 $request->body['surname'],
@@ -132,7 +132,6 @@ class ContactsController extends Controller
                 'success' => true,
                 'message' => 'Le contact a bien été modifié.'
             ], 200);
-        
         } else {
             return $response->jsonResponse([
                 'success' => false,
@@ -143,7 +142,7 @@ class ContactsController extends Controller
 
     public function delete(Request $request, Response $response)
     {
-        if(!Contact::find(['id' => $request->params['id'], 'user_id' => $request->user()->id])) {
+        if (!Contact::find(['id' => $request->params['id'], 'user_id' => $request->user()->id])) {
             return $response->jsonResponse([
                 'success' => false,
                 'message' => 'Le contact n\'existe pas.'
@@ -151,7 +150,7 @@ class ContactsController extends Controller
         }
 
         Contact::delete(['id' => $request->params['id'], 'user_id' => $request->user()->id]);
-        
+
         return $response->jsonResponse([
             'success' => true,
             'message' => 'Le contact a bien été supprimé.'

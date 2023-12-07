@@ -5,6 +5,9 @@ class View
 {
 	public static function make(string $view, array $params = [], string $layout = null): string
     {
+        if($layout === 'no-layout') {
+            return self::viewContent($view, $params);
+        }
         $layoutContent = self::layoutContent($layout ? $layout : Application::$app->controller->layout);
         $viewContent = self::viewContent($view, $params);
      
