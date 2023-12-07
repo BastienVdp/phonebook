@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Core;
+
 class Validation
 {
     public static array $labels;
-    
+
     public static function validate(Request $request, array $rules, string $model): array
     {
         $errors = [];
@@ -89,7 +90,7 @@ class Validation
         $confirmationKey = str_replace('_confirmation', '', $key);
         if ($value !== $request->body[$confirmationKey]) {
             return 'Le champ ' . strtolower(self::$labels[$key]) . ' ne correspond pas.';
-            }
+        }
 
         return null;
     }
@@ -110,7 +111,7 @@ class Validation
             if ($value === null) {
                 return null;
             }
-            
+
             return "Le champ " . strtolower(self::$labels[$key]) . " doit être un fichier.";
         }
 

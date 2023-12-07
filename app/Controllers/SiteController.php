@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controllers;
 
@@ -7,20 +7,19 @@ use App\Core\Controller;
 
 class SiteController extends Controller
 {
-
     public function landingPage()
     {
         return View::make('LandingPageView', layout: 'no-layout');
     }
 
     public function homepage()
-    {       
+    {
         return View::make('HomeView');
-    } 
+    }
 
     public function show()
     {
-        
+
         return View::make('ShowContactView');
     }
 

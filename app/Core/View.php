@@ -1,16 +1,17 @@
-<?php 
+<?php
 
 namespace App\Core;
-class View 
+
+class View
 {
-	public static function make(string $view, array $params = [], string $layout = null): string
+    public static function make(string $view, array $params = [], string $layout = null): string
     {
-        if($layout === 'no-layout') {
+        if ($layout === 'no-layout') {
             return self::viewContent($view, $params);
         }
         $layoutContent = self::layoutContent($layout ? $layout : Application::$app->controller->layout);
         $viewContent = self::viewContent($view, $params);
-     
+
         return str_replace('{{ content }}', $viewContent, $layoutContent);
     }
 
@@ -46,5 +47,4 @@ class View
     {
         return strpos(Application::$app->request->getPath(), $path) === 0;
     }
-
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models;
 
@@ -17,24 +17,24 @@ class Question extends Model
     public static function getAttributes(): array
     {
         return [
-            'question', 
-            'reponse',
-            'user_id'
-        ];
+                'question',
+                'reponse',
+                'user_id',
+               ];
     }
 
     public static function getLabels(): array
     {
         return [
-            'question' => 'Question de sécurité',
-            'reponse' => 'Réponse',
-            'question-1' => 'Question 1',
-            'question-2' => 'Question 2',
-            'question-3' => 'Question 3',
-            'reponse-1' => 'Réponse 1',
-            'reponse-2' => 'Réponse 2',
-            'reponse-3' => 'Réponse 3',
-        ];
+                'question'   => 'Question de sécurité',
+                'reponse'    => 'Réponse',
+                'question-1' => 'Question 1',
+                'question-2' => 'Question 2',
+                'question-3' => 'Question 3',
+                'reponse-1'  => 'Réponse 1',
+                'reponse-2'  => 'Réponse 2',
+                'reponse-3'  => 'Réponse 3',
+               ];
     }
 
     public function user()

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Middlewares;
 
@@ -10,12 +10,12 @@ class AuthMiddleware extends Middleware
 {
     public function execute($request): void
     {
-        if(View::isCurrentPath('/login') || View::isCurrentPath('/register')) {
-            if(Application::isConnected()) {
+        if (View::isCurrentPath('/login') || View::isCurrentPath('/register')) {
+            if (Application::isConnected()) {
                 Application::$app->response->redirect('/');
             }
         } else {
-            if(!Application::isConnected()) {
+            if (!Application::isConnected()) {
                 Application::$app->response->redirect('/login');
             }
         }

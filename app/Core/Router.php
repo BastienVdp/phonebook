@@ -49,7 +49,7 @@ class Router
 
     /**
      * The delete function adds a callback function to the routes array for the specified path.
-     * 
+     *
      * @param string path The path parameter is a string that represents the URL path for the route that
      * you want to delete. It is used to match the requested URL path with the registered routes.
      * @param callback The callback parameter is a function or method that will be executed when the
@@ -99,12 +99,12 @@ class Router
      * The function `getCallback` takes a path and method as input, matches the path against defined
      * routes, extracts route parameters, sets the request parameters, and returns the corresponding
      * callback function if a match is found.
-     * 
+     *
      * @param string path The path parameter is a string that represents the URL path that the user is
      * requesting. It should be in the format of "/example/path".
      * @param string method The method parameter is a string that represents the HTTP method of the
      * request, such as "GET", "POST", "PUT", etc.
-     * 
+     *
      * @return mixed the callback associated with the matching route if a match is found. If no match is
      * found, it returns false.
      */
@@ -116,11 +116,13 @@ class Router
         foreach ($routes as $route => $callback) {
             $route = trim($route, '/');
 
-            if (preg_match( // on vérifie si l'url correspond à l'expression régulière
-                $this->buildRegexFromRoute($route), // On crée une expression régulière à partir de la route
-                $path, // on compare l'expression régulière avec l'url
-                $matches
-            )) {
+            if (
+                preg_match( // on vérifie si l'url correspond à l'expression régulière
+                    $this->buildRegexFromRoute($route), // On crée une expression régulière à partir de la route
+                    $path, // on compare l'expression régulière avec l'url
+                    $matches
+                )
+            ) {
                 $routeName = $this->extractRouteNames($route); // on récupère les noms des paramètres définis dans les routes ex : {id}
                 $values = array_slice($matches, 1); // on récupère les valeurs des paramètres
 
@@ -138,11 +140,11 @@ class Router
     /**
      * The function builds a regular expression pattern from a given route string by replacing
      * placeholders with a regex pattern.
-     * 
+     *
      * @param string route The route parameter is a string that represents a route pattern. It may
      * contain placeholders enclosed in curly braces, such as "{id}" or "{slug}". These placeholders
      * represent dynamic parts of the route that can match any value.
-     * 
+     *
      * @return string a regular expression string.
      */
     private function buildRegexFromRoute(string $route): string
@@ -152,9 +154,9 @@ class Router
 
     /**
      * The function extracts route names from a given route string in PHP.
-     * 
+     *
      * @param string route The parameter `` is a string that represents a route.
-     * 
+     *
      * @return array an array of route names extracted from the given route string.
      */
     private function extractRouteNames(string $route): array

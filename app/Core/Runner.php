@@ -16,7 +16,7 @@ class Runner
     /**
      * The function applies seeders to the database if they exist, otherwise it logs that no seeders
      * were found.
-     * 
+     *
      * @return void void, which means it is not returning any value.
      */
     public function applySeeders(): void
@@ -33,15 +33,15 @@ class Runner
         $this->log("Seeders applied");
     }
 
-    
+
     /**
      * The function applies migrations to the database, optionally refreshing it before applying new
      * migrations.
-     * 
+     *
      * @param bool refresh The "refresh" parameter is a boolean flag that determines whether to refresh
      * the migrations. If set to true, it will drop all existing migrations and recreate them. If set
      * to false, it will only create new migrations without dropping the existing ones.
-     * 
+     *
      * @return bool a boolean value of true.
      */
     public function applyMigrations(bool $refresh = false): bool
@@ -65,7 +65,7 @@ class Runner
 
     /**
      * The function checks if there are any seeders (database factories) in the specified directory.
-     * 
+     *
      * @return bool a boolean value.
      */
     private function seedersExist(): bool
@@ -81,10 +81,10 @@ class Runner
     /**
      * The function `applyNewMigrations` applies new migrations to the database and returns an array of
      * the applied migrations.
-     * 
+     *
      * @param bool refresh A boolean value indicating whether to refresh the migrations. If set to
      * true, the down method of each migration will be called before applying the up method.
-     * 
+     *
      * @return array an array of new migrations that have been applied.
      */
     private function applyNewMigrations(bool $refresh): array
@@ -122,11 +122,13 @@ class Runner
 
     private function createMigrations(): void
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations (
+        $this->pdo->exec(
+            "CREATE TABLE IF NOT EXISTS migrations (
             id INT AUTO_INCREMENT PRIMARY KEY,
             migration VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=INNODB;");
+        ) ENGINE=INNODB;"
+        );
     }
 
     private function dropMigrations(): void

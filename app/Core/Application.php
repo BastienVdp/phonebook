@@ -10,10 +10,10 @@ use Firebase\JWT\JWT;
 use App\Core\Database;
 use App\Core\Response;
 
-/* 
- * The above class represents a PHP application with routing, 
+/*
+ * The above class represents a PHP application with routing,
  * database connection, session management,
- * and user authentication functionality. 
+ * and user authentication functionality.
  */
 
 class Application
@@ -21,7 +21,7 @@ class Application
     public static $root_dir;
     public static $app;
     public string $key;
-    
+
     public Request $request;
     public Response $response;
     public Router $router;
@@ -58,7 +58,7 @@ class Application
 
     /**
      * The function "get" sets a GET route in the PHP application's router.
-     * 
+     *
      * @param string path The path parameter is a string that represents the URL path for which the
      * callback function should be executed. It can be a specific path like "/users" or a dynamic path
      * like "/users/{id}".
@@ -74,7 +74,7 @@ class Application
     /**
      * The function "post" is used to register a POST route with a specified path and callback function
      * in a PHP application.
-     * 
+     *
      * @param string path The path parameter is a string that represents the URL path for the route. It
      * specifies the endpoint where the HTTP POST request will be sent to.
      * @param mixed callback The callback parameter is a mixed type, which means it can accept any type
@@ -88,7 +88,7 @@ class Application
 
     /**
      * The function deletes a route in the PHP application's router.
-     * 
+     *
      * @param string path The path parameter is a string that represents the URL path for the route
      * that you want to delete. It specifies the endpoint that the route will be associated with.
      * @param mixed callback The callback parameter is a function or method that will be executed when
@@ -102,7 +102,7 @@ class Application
 
     /**
      * The function checks if a user is currently connected in a PHP application.
-     * 
+     *
      * @return a boolean value indicating whether the user is connected or not.
      */
     public static function isConnected()
@@ -112,7 +112,7 @@ class Application
 
     /**
      * The function checks if the current user is an admin.
-     * 
+     *
      * @return the value of the "admin" property of the "user" object in the "app" property of the
      * class.
      */
@@ -123,7 +123,7 @@ class Application
 
     /**
      * The function sets the user property and stores the user object in the session.
-     * 
+     *
      * @param User user The "user" parameter is an instance of the User class.
      */
     public function setUser(User $user): void
@@ -150,10 +150,10 @@ class Application
     public function generateJwtToken($user)
     {
         $token = [
-            'iat' => time(), // Heure d'émission
-            'exp' => time() + (60 * 60 * 24), // Expiration après 1 heure
-            'user' => $user, // Ajouter d'autres claims
-        ];
+                  'iat'  => time(), // Heure d'émission
+                  'exp'  => time() + (60 * 60 * 24), // Expiration après 1 heure
+                  'user' => $user, // Ajouter d'autres claims
+                 ];
 
         $jwt = JWT::encode($token, $this->key, 'HS256');
 

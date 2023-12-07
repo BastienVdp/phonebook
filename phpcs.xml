@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ruleset name="PSR2 with Customizations">
+    <description>Customized ruleset based on PSR-2</description>
+
+    <!-- Include the PSR-2 standard -->
+    <rule ref="PSR2"/>
+
+    <!-- Ignore new line after closing parenthesis -->
+    <rule name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" severity="0"/>
+
+    <!-- Adjust array declaration -->
+    <rule ref="Squiz.Arrays.ArrayDeclaration">
+        <properties>
+            <property name="maximumSingleLineElements" value="4"/>
+            <property name="minimumMultiLineElements" value="4"/>
+        </properties>
+    </rule>
+</ruleset>
