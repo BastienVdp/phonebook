@@ -6,7 +6,8 @@
 - Clone the projet using git
 - Run `composer install`
 - Run `npm install`
-- Configure the app/config.php 
+- Configure the app/config.php
+- You can create factories in the database/factories and don't forget to add it in the database/seeders
 - Run migrations by executing `php database/index.php (--seed| --refresh)`
 - Run `npm run dev` for compiling assets (js, scss) only for development 
 
