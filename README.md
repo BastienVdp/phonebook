@@ -8,7 +8,7 @@
 - Run `npm install`
 - Configure the app/config.php 
 - Run migrations by executing `php database/index.php (--seed| --refresh)`
-- Run `npm run dev`
+- Run `npm run dev` for compiling assets (js, scss) only for development 
 
 ## Pattern 
 - All controllers in the app/Controllers folder
