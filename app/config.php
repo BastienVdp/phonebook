@@ -9,5 +9,4 @@ return [
                        'username' => 'root',
                        'password' => '',
                       ],
-        "session"  => ['flash_key' => 'flash_key'],
        ];
